@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Date Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation Container -->
+    <div id="animation-container" aria-hidden="true"></div>
+
+    <main class="app-container glass-panel">
+        
+        <!-- Step 1: Landing -->
+        <section id="step-1" class="step-section active">
+            <div class="illustration">💖✨</div>
+            <h1 class="title">Let's Plan a Date</h1>
+            <p class="subtitle">I'd love to spend some quality time with you. Let's create the perfect plan together.</p>
+            <button class="primary-btn" onclick="app.goToStep(2)">Start Planning <span class="btn-icon">→</span></button>
+        </section>
+
+        <!-- Step 2: Date & Time -->
+        <section id="step-2" class="step-section hidden">
+            <h2 class="title">When & Where?</h2>
+            <p class="subtitle">Let's pick a time that works.</p>
+            
+            <div class="form-group">
+                <label for="date-input">Select Date *</label>
+                <input type="date" id="date-input" required aria-required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="time-input">Select Time *</label>
+                <input type="time" id="time-input" required aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="location-input">Location (Optional)</label>
+                <input type="text" id="location-input" placeholder="e.g., Downtown, My Place, Central Park">
+            </div>
+
+            <div class="error-msg" id="step-2-error" role="alert">Please select a date and time.</div>
+
+            <div class="button-group">
+                <button class="secondary-btn" onclick="app.goToStep(1)">Back</button>
+                <button class="primary-btn" onclick="app.validateStep2()">Next</button>
+            </div>
+        </section>
+
+        <!-- Step 3: Activities -->
+        <section id="step-3" class="step-section hidden">
+            <h2 class="title">What should we do?</h2>
+            <p class="subtitle">Pick the vibe for our date.</p>
+            
+            <div class="activities-grid">
+                <button class="activity-card" data-activity="Coffee Date" aria-pressed="false">
+                    <div class="activity-icon">☕</div>
+                    <span>Coffee Date</span>
+                </button>
+                <button class="activity-card" data-activity="Dinner" aria-pressed="false">
+                    <div class="activity-icon">🍽️</div>
+                    <span>Dinner</span>
+                </button>
+                <button class="activity-card" data-activity="Sunset Walk" aria-pressed="false">
+                    <div class="activity-icon">🌅</div>
+                    <span>Sunset Walk</span>
+                </button>
+                <button class="activity-card" data-activity="Movie Night" aria-pressed="false">
+                    <div class="activity-icon">🍿</div>
+                    <span>Movie Night</span>
+                </button>
+                <button class="activity-card" data-activity="Sweet Dessert" aria-pressed="false">
+                    <div class="activity-icon">🍦</div>
+                    <span>Dessert</span>
+                </button>
+                <button class="activity-card" data-activity="Surprise Me!" aria-pressed="false">
+                    <div class="activity-icon">🎁</div>
+                    <span>Surprise Me!</span>
+                </button>
+            </div>
+
+            <div class="error-msg" id="step-3-error" role="alert">Please select an activity to continue.</div>
+
+            <div class="button-group">
+                <button class="secondary-btn" onclick="app.goToStep(2)">Back</button>
+                <button class="primary-btn" onclick="app.validateStep3()">Next</button>
+            </div>
+        </section>
+
+        <!-- Step 4: Personal Message -->
+        <section id="step-4" class="step-section hidden">
+            <h2 class="title">Anything else?</h2>
+            <p class="subtitle">Add a sweet note or special request.</p>
+            
+            <div class="form-group">
+                <label for="message-input">Your Message (Optional)</label>
+                <textarea id="message-input" rows="4" placeholder="Can't wait to see you!"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="secondary-btn" onclick="app.goToStep(3)">Back</button>
+                <button class="primary-btn" onclick="app.generateSummary()">Review Plan</button>
+            </div>
+        </section>
+
+        <!-- Step 5: Confirmation -->
+        <section id="step-5" class="step-section hidden">
+            <h2 class="title">Our Date is Planned! 🎉</h2>
+            <div class="summary-card glass-panel-inner" id="summary-content">
+                <!-- Summary content injected via JS -->
+            </div>
+
+            <div class="action-buttons">
+                <button class="primary-btn" id="copy-btn" onclick="app.copyPlan()">📋 Copy Plan</button>
+                <button class="secondary-btn" onclick="app.restart()">🔄 Restart</button>
+            </div>
+            <p id="copy-feedback" class="feedback-msg" role="status" aria-live="polite"></p>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
